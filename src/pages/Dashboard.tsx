@@ -14,12 +14,13 @@ type AppParams = {
 function Dashboard() {
     const { appId } = useParams<AppParams>()
     const { data, isLoading, isError } = useFetchRequests(appId)
-    const [url, setUrl] = React.useState("")
+    const [name, setName] = React.useState("")
 
     const createRequestMutation = useMutation({
-        mutationFn: async (url: string) => {
+        mutationFn: async (name: string) => {
             const request = await api.post(`/apps/${appId}/request/`,{
-                url: url,
+                name: name,
+                url: "",
                 description: "",
                 seach_params: [],
                 body: {
@@ -47,8 +48,8 @@ function Dashboard() {
     })
 
     const handleCreateRequest = () => {
-        createRequestMutation.mutate(url)
-        setUrl("")
+        createRequestMutation.mutate(name)
+        setName("")
     }
 
     if (isLoading) {
@@ -61,7 +62,7 @@ function Dashboard() {
             <div className="flex flex-row">
                 <div className="h-screen w-80 bg-base-300 border-r-4 border-base-300">
                     <div className="flex flex-row">
-                            <input type="text" placeholder="Add new url" className="input w-full max-w-xs m-2" value={url} onChange={(e) => {setUrl(e.target.value)}} />
+                            <input type="text" placeholder="Add new request" className="input w-full max-w-xs m-2" value={name} onChange={(e) => {setName(e.target.value)}} />
                             <div className="btn btn-ghost m-2" onClick={() => {handleCreateRequest()}}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -79,7 +80,7 @@ function Dashboard() {
                                         {data.body.method}
                                     </div>
                                     <Link to={link} onClick={() => {queryClient.invalidateQueries(["request",data.id.toString()])}}>
-                                        {data.url}
+                                        {data.name}
                                     </Link>
                                     <div className="btn btn-ghost" onClick={() => {deleteRequestMutation.mutate(data.id)}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

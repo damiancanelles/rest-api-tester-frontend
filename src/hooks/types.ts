@@ -25,6 +25,12 @@ export interface KeyValue {
     value: string
 }
 
+export interface SearchParam {
+    key: string
+    value: string
+    relation: string
+}
+
 export interface RequestBody {
     method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
     headers: KeyValue[]
@@ -41,24 +47,26 @@ export interface CreateRequestBody {
 
 export interface Request {
     id: number
+    name: string
     url: string
     description: string
     body: RequestBody
-    seach_params: KeyValue[]
+    seach_params: SearchParam[]
 }
 
 export interface CreateRequest {
+    name: string
     url: string
     description: string
     body: CreateRequestBody
-    seach_params: KeyValue[]
+    seach_params: SearchParam[]
 }
 
 export interface CreateRequestObject {
     url: string
     description: string
     body: RequestBody
-    seach_params: KeyValue[]
+    seach_params: SearchParam[]
 }
 
 export interface Test {
