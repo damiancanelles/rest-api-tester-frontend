@@ -15,15 +15,15 @@ const TestsTable: React.FC<TableProps> = ({ requestId }) => {
         <table className="table w-full">
             <thead>
                 <tr>
-                    <th>Status</th>
-                    <th>Datetime</th>
+                    <th>Estado</th>
+                    <th>Fecha y Hora</th>
                 </tr>
             </thead>
             <tbody>
                 {   
                     data?.map((test) => (
                         <tr key={test.id}>
-                            <td>{test.passed ? <div className="badge badge-info">Pass</div> : <div className="badge badge-secondary">Error</div>}</td>
+                            <td>{test.passed ? <div className="badge badge-info">Exitoso</div> : <div className="badge badge-secondary">Fallido</div>}</td>
                             <td>{test.created_date}</td>
                         </tr>
                     ))

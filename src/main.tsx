@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Request from './pages/Request'
+import Tests from './pages/Tests'
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         element: <Request/>
       },
     ]
+  },
+  {
+    path: "/apps/:appId/tests/",
+    element: <Tests/>,
   }
 ]);
 

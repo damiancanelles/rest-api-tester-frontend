@@ -47,6 +47,7 @@ export interface CreateRequestBody {
 
 export interface Request {
     id: number
+    frecuency: string
     name: string
     url: string
     description: string
@@ -55,6 +56,7 @@ export interface Request {
 }
 
 export interface CreateRequest {
+    frecuency: string
     name: string
     url: string
     description: string
@@ -63,6 +65,8 @@ export interface CreateRequest {
 }
 
 export interface CreateRequestObject {
+    frecuency: string
+    name: string
     url: string
     description: string
     body: RequestBody
@@ -73,5 +77,10 @@ export interface Test {
     id: number
     passed: boolean
     response: object
+    created_date: string
+}
+export interface SimpleTest {
+    id: number
+    passed: boolean
     created_date: string
 }

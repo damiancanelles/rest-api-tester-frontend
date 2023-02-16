@@ -20,6 +20,7 @@ function Dashboard() {
         mutationFn: async (name: string) => {
             const request = await api.post(`/apps/${appId}/request/`,{
                 name: name,
+                frecuency: "nunca",
                 url: "",
                 description: "",
                 seach_params: [],
@@ -62,7 +63,7 @@ function Dashboard() {
             <div className="flex flex-row">
                 <div className="h-screen w-80 bg-base-300 border-r-4 border-base-300">
                     <div className="flex flex-row">
-                            <input type="text" placeholder="Add new request" className="input w-full max-w-xs m-2" value={name} onChange={(e) => {setName(e.target.value)}} />
+                            <input type="text" placeholder="Agrega una petición" className="input w-full max-w-xs m-2" value={name} onChange={(e) => {setName(e.target.value)}} />
                             <div className="btn btn-ghost m-2" onClick={() => {handleCreateRequest()}}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />

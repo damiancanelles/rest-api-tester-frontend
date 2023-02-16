@@ -88,6 +88,7 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
     const onSubmit = (requestData: CreateRequest) => {
         const body = {
             name: name,
+            frecuency: requestData.frecuency,
             url: requestData.url,
             seach_params: seach_params,
             description: requestData.description,
@@ -105,6 +106,9 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
         <>
             <div className="flex flex-row p-4 space-x-4 w-full">
                 <div>
+                    <label className="label">
+                        <span className="label-text">Método</span>
+                    </label>
                     <select {...register("body.method")} defaultValue={data?.body.method} className="select select-bordered">
                         <option>GET</option>
                         <option>POST</option>
@@ -114,21 +118,41 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
                     </select>
                 </div>
                 <div>
+                    <label className="label">
+                        <span className="label-text">Url</span>
+                    </label>
                     <input {...register("url")} defaultValue={data?.url} type="text" placeholder="Url" className="input input-bordered w-[900px]" />
                 </div>
-                <div>
+                <div className="pt-9">
                     <button onClick={handleSubmit(onSubmit)} className="btn">Save</button>
                 </div>
-                <div>
+                <div className="pt-9">
                     <button className="btn btn-info" onClick={() => {testRequestMutation.mutate(requestId)}}>Test</button>
                 </div>
             </div>
             <div className="flex flex-row p-4 space-x-4 w-full">
                 <div>
-                    <textarea {...register("description")} defaultValue={data?.description} className="textarea textarea-bordered w-[500px]" placeholder="Description"></textarea>
+                    <label className="label">
+                        <span className="label-text">Descripción</span>
+                    </label>
+                    <textarea {...register("description")} defaultValue={data?.description} className="textarea textarea-bordered w-[500px]" placeholder="Descripción"></textarea>
                 </div>
                 <div>
-                    <textarea {...register("body.body")} defaultValue={JSON.stringify(data?.body.body)} className="textarea textarea-bordered w-[500px]" placeholder="Body"></textarea>
+                    <label className="label">
+                        <span className="label-text">JSON</span>
+                    </label>
+                    <textarea {...register("body.body")} defaultValue={JSON.stringify(data?.body.body)} className="textarea textarea-bordered w-[500px]" placeholder="JSON"></textarea>
+                </div>
+                <div>
+                    <label className="label">
+                        <span className="label-text">Frecuencia</span>
+                    </label>
+                    <select {...register("frecuency")} defaultValue={data?.frecuency} className="select select-bordered">
+                        <option>nunca</option>
+                        <option>diario</option>
+                        <option>semanal</option>
+                        <option>mensual</option>
+                    </select>
                 </div>
             </div>
             <div className="flex flex-row p-4 space-x-4 w-full">
@@ -142,15 +166,15 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
                         index != 1 && (
                             <div className="flex flex-row space-x-2 pb-2">
                                 <div>
-                                    <input value={key} onChange={(e) => {setKey(e.target.value)}} type="text" placeholder="Key" className="input input-bordered" />
+                                    <input value={key} onChange={(e) => {setKey(e.target.value)}} type="text" placeholder="Clave" className="input input-bordered" />
                                 </div>
                                 <div>
-                                    <input value={value} onChange={(e) => {setVal(e.target.value)}} type="text" placeholder="Value" className="input input-bordered" />
+                                    <input value={value} onChange={(e) => {setVal(e.target.value)}} type="text" placeholder="Valor" className="input input-bordered" />
                                 </div>
                                 <div>
                                     <button className="btn" onClick={() => {
                                         index == 2 ? handleAddParams() : handleAddHeaders()
-                                    }}>Add</button>
+                                    }}>Agregar</button>
                                 </div>
                             </div>
                         )
@@ -175,7 +199,7 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
                                     </select>
                                 </div>
                                 <div>
-                                    <input value={valueSearch} onChange={(e) => {setValSearch(e.target.value)}} type="text" placeholder="VALOR" className="input input-bordered" />
+                                    <input value={valueSearch} onChange={(e) => {setValSearch(e.target.value)}} type="text" placeholder="Valor" className="input input-bordered" />
                                 </div>
                                 <div>
                                     <button className="btn" onClick={() => {
@@ -190,17 +214,17 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
                         {
                             index != 1 && (
                                 <tr>
-                                    <th>Key</th>
-                                    <th>Value</th>
+                                    <th>Clave</th>
+                                    <th>Valor</th>
                                 </tr>
                             )
                         }
                         {
                             index == 1 && (
                                 <tr>
-                                    <th>Key</th>
-                                    <th>Relation</th>
-                                    <th>Value</th>
+                                    <th>Clave</th>
+                                    <th>Relación</th>
+                                    <th>Valor</th>
                                 </tr>
                             )
                         }
@@ -255,7 +279,10 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
                 </div>
             </div>
             <div className="p-4 space-x-4 w-full">
-                <textarea readOnly className="textarea textarea-bordered w-[1000px]" value={response} placeholder="Response"></textarea>
+                <label className="label">
+                    <span className="label-text">Respuesta</span>
+                </label>
+                <textarea readOnly className="textarea textarea-bordered w-[1000px]" value={response} placeholder="Respuesta"></textarea>
             </div>
         </>
     )
