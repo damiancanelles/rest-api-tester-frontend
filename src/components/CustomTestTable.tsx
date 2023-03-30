@@ -28,9 +28,6 @@ const CustomTestsTable: React.FC<TableProps> = ({ data }) => {
             handleAddTest(request.data.id, request.data.passed, request.data.created_date)
             return request.data
         },
-        async onSuccess () {
-            await queryClient.invalidateQueries(["tests"])
-        }
     })
 
     const handleStart = () => {
@@ -40,32 +37,32 @@ const CustomTestsTable: React.FC<TableProps> = ({ data }) => {
         })
     }
 
+    React.useEffect(() => {
+        handleStart()
+        console.log(data)
+    },[])
+
     return (
         <div className="overflow-x-auto m-10 rounded border-2 border-base-300">
             <table className="table w-full">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
+                        <th>Id</th>
                         <th>Estado</th>
                         <th>Fecha y Hora</th>
-                        <th>
-                            <div className="flex flex-row justify-end">
-                                <div className="btn btn-ghost" onClick={() => {handleStart()}}>
-                                    Iniciar
-                                </div>
-                            </div>
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     {   
-                        tests?.map((test, index: number) => (
+                        tests?.map((test, index: number) => {
+                            console.log(index)
+                            return (
                             <tr key={index}>
-                                <td>{data ? data[index].name : ""}</td>
+                                <td>{index}</td>
                                 <td>{test.passed ? <div className="badge badge-info">Exitoso</div> : <div className="badge badge-secondary">Fallido</div>}</td>
                                 <td>{test.created_date}</td>
                             </tr>
-                        ))
+                        )})
                     }
                 </tbody>
             </table>
