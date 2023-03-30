@@ -29,6 +29,7 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
     const testRequestMutation = useMutation({
         mutationFn: async (requestId: string = "0") => {
             const request = await api.get(`/requests/${requestId}/test/`)
+            setResponse(JSON.stringify(request.data))
             return request.data
         },
         async onSuccess () {
@@ -43,7 +44,6 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
         },
         async onSuccess () {
             await queryClient.invalidateQueries(["requests"])
-            setResponse(JSON.stringify(updateRequestMutation.data.response))
         }
     })
 
@@ -150,8 +150,6 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
                     <select {...register("frecuency")} defaultValue={data?.frecuency} className="select select-bordered">
                         <option>nunca</option>
                         <option>diario</option>
-                        <option>semanal</option>
-                        <option>mensual</option>
                     </select>
                 </div>
             </div>
@@ -187,15 +185,12 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
                                         <option>status</option>
                                         <option>body</option>
                                         <option>headers</option>
-                                        <option>params</option>
                                     </select>
                                 </div>
                                 <div>
                                     <select value={relationSearch} onChange={(e) => {setRelationSearch(e.target.value)}} className="select select-bordered">
                                         <option>igual</option>
                                         <option>contiene</option>
-                                        <option>menor</option>
-                                        <option>mayor</option>
                                     </select>
                                 </div>
                                 <div>
