@@ -23,7 +23,7 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
     const [name, _] = React.useState<string>(() => { return (data == undefined) ? "" : data.name})
     const [headers, setHeaders] = React.useState<KeyValue[]>(() => { return (data == undefined) ? [] : data.body.headers})
     const [params, setParams] = React.useState<KeyValue[]>(() => { return (data == undefined) ? [] : data.body.params})
-    const [seach_params, setSeachParams] = React.useState<SearchParam[]>(() => { return (data == undefined) ? [] : data.seach_params})
+    const [seach_params, setSeachParams] = React.useState<SearchParam[]>(() => { return (data == undefined) ? [] : JSON.parse(data.search_params)})
     const [response, setResponse] = React.useState("{}")
 
     const testRequestMutation = useMutation({
@@ -90,7 +90,7 @@ const RequestForm: React.FC<RequestProps> = ({ data, requestId }) => {
             name: name,
             frecuency: requestData.frecuency,
             url: requestData.url,
-            seach_params: seach_params,
+            search_params: JSON.stringify(seach_params),
             description: requestData.description,
             body: {
                 method: requestData.body.method,

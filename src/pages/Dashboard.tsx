@@ -23,7 +23,7 @@ function Dashboard() {
                 frecuency: "nunca",
                 url: "",
                 description: "",
-                seach_params: [],
+                search_params: JSON.stringify([]),
                 body: {
                     method: "GET",
                     headers: [],

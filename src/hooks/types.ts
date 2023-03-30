@@ -52,7 +52,7 @@ export interface Request {
     url: string
     description: string
     body: RequestBody
-    seach_params: SearchParam[]
+    search_params: string
 }
 
 export interface CreateRequest {
@@ -70,7 +70,7 @@ export interface CreateRequestObject {
     url: string
     description: string
     body: RequestBody
-    seach_params: SearchParam[]
+    search_params: string
 }
 
 export interface Test {
