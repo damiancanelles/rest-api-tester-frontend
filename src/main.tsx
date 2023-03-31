@@ -12,22 +12,22 @@ import Tests from './pages/Tests'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/PruebasAutomatizadas/",
     element: <Home />,
     
   },
   {
-    path: "/apps/:appId",
+    path: "/PruebasAutomatizadas/apps/:appId",
     element: <Dashboard/>,
     children: [
       {
-        path: "/apps/:appId/request/:requestId",
+        path: "/PruebasAutomatizadas/apps/:appId/request/:requestId",
         element: <Request/>
       },
     ]
   },
   {
-    path: "/apps/:appId/tests/",
+    path: "/PruebasAutomatizadas/apps/:appId/tests/",
     element: <Tests/>,
   }
 ]);
